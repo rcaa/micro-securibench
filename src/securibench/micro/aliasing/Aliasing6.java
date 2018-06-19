@@ -22,7 +22,7 @@ public class Aliasing6 extends BasicTestCase implements MicroTestCase {
 	private static final String FIELD_NAME = "name";
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-       String[] names = req.getParameterValues(FIELD_NAME);
+       String[] names = req.getParameterValues(FIELD_NAME); //source high
        Object 
        	o1, o2, o3, o4, o5, o6, o7, o8, o9, o10, o11, o12, o13, o14, o15, o16, o17, o18, o19, o20,
        	o21, o22, o23, o24, o25, o26, o27, o28, o29, o30, o31, o32, o33, o34, o35, o36, o37, o38, o39, o40;
@@ -31,13 +31,13 @@ public class Aliasing6 extends BasicTestCase implements MicroTestCase {
   		   names[0];
               
        PrintWriter writer = resp.getWriter();
-       writer.println(o1);                              /* BAD */
-       writer.println(o2);                              /* BAD */
-       writer.println(o3);                              /* BAD */
-       writer.println(o4);                              /* BAD */
-       writer.println(o32);                             /* BAD */
-       writer.println(o37);                             /* BAD */
-       writer.println(o40);                             /* BAD */
+       writer.println(o1);                              /* BAD */ //sink low
+       writer.println(o2);                              /* BAD */ //sink low
+       writer.println(o3);                              /* BAD */ //sink low
+       writer.println(o4);                              /* BAD */ //sink low
+       writer.println(o32);                             /* BAD */ //sink low
+       writer.println(o37);                             /* BAD */ //sink low
+       writer.println(o40);                             /* BAD */ //sink low
     }
     
     public String getDescription() {
@@ -47,4 +47,14 @@ public class Aliasing6 extends BasicTestCase implements MicroTestCase {
     public int getVulnerabilityCount() {
         return 7;
     }
+    
+    public static void main(String[] args) {
+		Aliasing6 a = new Aliasing6();
+		try {
+			a.doGet(null, null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

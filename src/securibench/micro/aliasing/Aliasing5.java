@@ -29,10 +29,10 @@ public class Aliasing5 extends BasicTestCase implements MicroTestCase {
     }
     
     void foo(StringBuffer buf, StringBuffer buf2, ServletResponse resp, ServletRequest req) throws IOException {
-    	String name = req.getParameter(FIELD_NAME);
+    	String name = req.getParameter(FIELD_NAME); //source high
     	buf.append(name);
     	PrintWriter writer = resp.getWriter();
-        writer.println(buf2.toString());                              /* BAD */
+        writer.println(buf2.toString());                              /* BAD */ //sink low
 	}
 
 	public String getDescription() {
@@ -42,4 +42,14 @@ public class Aliasing5 extends BasicTestCase implements MicroTestCase {
     public int getVulnerabilityCount() {
         return 1;
     }
+    
+    public static void main(String[] args) {
+		Aliasing5 a = new Aliasing5();
+		try {
+			a.doGet(null, null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

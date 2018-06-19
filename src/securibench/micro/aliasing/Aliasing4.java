@@ -22,15 +22,15 @@ public class Aliasing4 extends BasicTestCase implements MicroTestCase {
 	private static final String FIELD_NAME = "name";
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-       String name = req.getParameter(FIELD_NAME);
+       String name = req.getParameter(FIELD_NAME); //source high
        Object o1 = name;
        Object o2 = name.concat("abc");
        Object o3 = "anc";
               
        PrintWriter writer = resp.getWriter();
-       writer.println(o1);                              /* BAD */
-       writer.println(o2);                              /* BAD */
-       writer.println(o3);                              /* OK */
+       writer.println(o1);                              /* BAD */ //sink low
+       writer.println(o2);                              /* BAD */ //sink low
+       writer.println(o3);                              /* OK */ //sink low
     }
     
     public String getDescription() {
@@ -40,4 +40,14 @@ public class Aliasing4 extends BasicTestCase implements MicroTestCase {
     public int getVulnerabilityCount() {
         return 1;
     }
+    
+    public static void main(String[] args) {
+		Aliasing4 a = new Aliasing4();
+		try {
+			a.doGet(null, null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
