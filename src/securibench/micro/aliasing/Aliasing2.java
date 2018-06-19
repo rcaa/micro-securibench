@@ -22,12 +22,12 @@ public class Aliasing2 extends BasicTestCase implements MicroTestCase {
 	private static final String FIELD_NAME = "name";
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-       String name = req.getParameter(FIELD_NAME);
+       String name = req.getParameter(FIELD_NAME); //source high
        String str = "abc";
        name = str;
               
        PrintWriter writer = resp.getWriter();
-       writer.println(str);                              /* OK */
+       writer.println(str);                              /* OK */ //sink low
     }
     
     public String getDescription() {
@@ -37,4 +37,14 @@ public class Aliasing2 extends BasicTestCase implements MicroTestCase {
     public int getVulnerabilityCount() {
         return 1;
     }
+    
+    public static void main(String[] args) {
+		Aliasing2 a = new Aliasing2();
+		try {
+			a.doGet(null, null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

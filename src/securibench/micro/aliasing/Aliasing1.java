@@ -22,11 +22,11 @@ public class Aliasing1 extends BasicTestCase implements MicroTestCase {
 	private static final String FIELD_NAME = "name";
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-       String name = req.getParameter(FIELD_NAME);
+       String name = req.getParameter(FIELD_NAME); //source high
        String str = name;
               
        PrintWriter writer = resp.getWriter();
-       writer.println(str);                              /* BAD */
+       writer.println(str);                              /* BAD */  //sink low
     }
     
     public String getDescription() {
