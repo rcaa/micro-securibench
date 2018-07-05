@@ -18,12 +18,12 @@ import securibench.micro.MicroTestCase;
  *  */
 public class Arrays9 extends BasicTestCase implements MicroTestCase {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String name = req.getParameter("name");
+        String name = req.getParameter("name"); //source high
         String[][] array = new String[3][5];
         array[0][0] = name;
         
         PrintWriter writer = resp.getWriter();
-        writer.println(array[0][0]);         /* BAD */
+        writer.println(array[0][0]);         /* BAD */ //sink low
     }
     
     public String getDescription() {
@@ -33,4 +33,13 @@ public class Arrays9 extends BasicTestCase implements MicroTestCase {
     public int getVulnerabilityCount() {
         return 1;
     }
+    
+    public static void main(String[] args) {
+		Arrays9 a = new Arrays9();
+		try {
+			a.doGet(null, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
