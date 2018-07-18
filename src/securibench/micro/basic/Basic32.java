@@ -18,11 +18,11 @@ import securibench.micro.MicroTestCase;
  */
 public class Basic32 extends BasicTestCase implements MicroTestCase {
       protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String header = req.getHeader("Accept-Language");
+        String header = req.getHeader("Accept-Language"); //source high
         
         PrintWriter writer = resp.getWriter();
         
-        writer.println(header);                      /* BAD */
+        writer.println(header);                      /* BAD */ //sink low
     }
 
     public String getDescription() {
@@ -32,4 +32,13 @@ public class Basic32 extends BasicTestCase implements MicroTestCase {
     public int getVulnerabilityCount() {
         return 1;
     }
+    
+    public static void main(String[] args) {
+		Basic32 b = new Basic32();
+		try {
+			b.doGet(null, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

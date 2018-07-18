@@ -22,12 +22,12 @@ public class Basic19 extends BasicTestCase implements MicroTestCase {
     private static final String FIELD_NAME = "name";
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String name = req.getParameter(FIELD_NAME);
+        String name = req.getParameter(FIELD_NAME); //source high
         
         Connection con = null; 
         try {
             con = DriverManager.getConnection(MicroTestCase.CONNECTION_STRING);
-            con.prepareStatement("select * from Users where name=" + name); /* BAD */
+            con.prepareStatement("select * from Users where name=" + name); /* BAD */ //sink low
         } catch (SQLException e) {
             System.err.println("An error occurred");
         } finally {
@@ -46,4 +46,13 @@ public class Basic19 extends BasicTestCase implements MicroTestCase {
     public int getVulnerabilityCount() {
         return 1;
     }
+    
+    public static void main(String[] args) {
+		Basic19 b = new Basic19();
+		try {
+			b.doGet(null, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

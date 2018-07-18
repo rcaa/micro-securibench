@@ -54,4 +54,13 @@ public class Basic21 extends BasicTestCase implements MicroTestCase {
     public int getVulnerabilityCount() {
         return 4;
     }
+    
+    public static void main(String[] args) {
+		Basic21 b = new Basic21();
+		try {
+			b.doGet(null, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

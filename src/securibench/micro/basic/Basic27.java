@@ -21,13 +21,13 @@ public class Basic27 extends BasicTestCase implements MicroTestCase {
     private static final String FIELD_NAME = "name";
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-       Enumeration e = req.getParameterNames();
+       Enumeration e = req.getParameterNames(); //source high
        while(e.hasMoreElements()) {
            String name = (String) e.nextElement();
            if(name.equals(FIELD_NAME)) {
                PrintWriter writer = resp.getWriter();
                String value = req.getParameter(name);
-               writer.println("value: " + value);           /* BAD */
+               writer.println("value: " + value);           /* BAD */ //sink low
            }
        }
     }
@@ -39,4 +39,13 @@ public class Basic27 extends BasicTestCase implements MicroTestCase {
     public int getVulnerabilityCount() {
         return 1;
     }
+    
+    public static void main(String[] args) {
+		Basic27 b = new Basic27();
+		try {
+			b.doGet(null, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

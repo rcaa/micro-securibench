@@ -18,15 +18,15 @@ import securibench.micro.MicroTestCase;
  *  */
 public class Basic11 extends BasicTestCase implements MicroTestCase {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String s1 = req.getParameter("name");
+        String s1 = req.getParameter("name"); //source high
         String s2 = "abc";
         String s3 = s1.toUpperCase();
         String s4 = s2.toUpperCase();
         
         PrintWriter writer = resp.getWriter();
-        writer.println(s3);         /* BAD */
-        writer.println(s1 + ";");   /* BAD */
-        writer.println(s4);         /* OK */
+        writer.println(s3);         /* BAD */ //sink low
+        writer.println(s1 + ";");   /* BAD */ //sink low
+        writer.println(s4);         /* OK */ //sink low
     }
     
     public String getDescription() {
@@ -36,4 +36,13 @@ public class Basic11 extends BasicTestCase implements MicroTestCase {
     public int getVulnerabilityCount() {
         return 2;
     }
+    
+   public static void main(String[] args) {
+		Basic11 b = new Basic11();
+		try {
+			b.doGet(null, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	} 
 }
