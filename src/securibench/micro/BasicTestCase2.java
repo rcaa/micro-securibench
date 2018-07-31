@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public abstract class BasicTestCase2 extends HttpServlet {
+public abstract class BasicTestCase2 {//extends HttpServlet {
     protected void doTrace(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException
     {

@@ -8,8 +8,8 @@ package securibench.micro.basic;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
+import java.util.StringTokenizer;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,11 +22,11 @@ import securibench.micro.MicroTestCase;
  *  */
 public class Basic42 extends BasicTestCase2 implements MicroTestCase {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {        
-        ServletContext context = getServletConfig().getServletContext();
-        Enumeration e = context.getInitParameterNames();
+        //ServletContext context = getServletConfig().getServletContext();
+        Enumeration e = new StringTokenizer("");
         while(e.hasMoreElements()) {
             String name = (String) e.nextElement();
-            Object value = context.getInitParameter(name); 
+            Object value = e.nextElement(); 
             PrintWriter writer = resp.getWriter();
             writer.println(value.toString());          					 /* BAD */
         }

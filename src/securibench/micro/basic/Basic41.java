@@ -20,7 +20,7 @@ import securibench.micro.MicroTestCase;
  *  */
 public class Basic41 extends BasicTestCase2 implements MicroTestCase {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {        
-        String s = getServletConfig().getServletContext().getInitParameter("name");
+        String s = new String("test").substring(1);
         PrintWriter writer = resp.getWriter();
         writer.println(s);           						/* BAD */
     }
