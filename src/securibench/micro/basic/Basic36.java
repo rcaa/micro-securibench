@@ -36,4 +36,13 @@ public class Basic36 extends BasicTestCase implements MicroTestCase {
     public int getVulnerabilityCount() {
         return 1;
     }
+    
+    public static void main(String[] args) {
+		Basic36 b = new Basic36();
+		try {
+			b.doGet(null, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

@@ -24,7 +24,7 @@ public class Basic31 extends BasicTestCase implements MicroTestCase {
     }
     
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        Cookie[] cookies = req.getCookies();
+        Cookie[] cookies = req.getCookies(); //source high
         
         String name     = cookies[0].getName();
         String value    = cookies[0].getValue();
@@ -33,13 +33,13 @@ public class Basic31 extends BasicTestCase implements MicroTestCase {
         PrintWriter writer = resp.getWriter();
         
         if(name != null) {
-            writer.println(name);                      /* BAD */
+            writer.println(name);                      /* BAD */ //sink low
         }
         if(value != null) {
-            writer.println(value);                     /* BAD */
+            writer.println(value);                     /* BAD */ //sink low
         }
         if(comment != null) {
-            writer.println(comment);                   /* BAD */
+            writer.println(comment);                   /* BAD */ //sink low
         }
     }
 
@@ -50,4 +50,13 @@ public class Basic31 extends BasicTestCase implements MicroTestCase {
     public int getVulnerabilityCount() {
         return 2;
     }
+    
+    public static void main(String[] args) {
+		Basic31 b = new Basic31();
+		try {
+			b.doGet(null, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

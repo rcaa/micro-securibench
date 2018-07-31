@@ -21,11 +21,11 @@ public class Basic25 extends BasicTestCase implements MicroTestCase {
     private static final String FIELD_NAME = "name";
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-       String[] s = req.getParameterValues(FIELD_NAME);
+       String[] s = req.getParameterValues(FIELD_NAME); //source high
        String name = s[0].toLowerCase(Locale.UK);
        
        PrintWriter writer = resp.getWriter();
-       writer.println(name);                    /* BAD */
+       writer.println(name);                    /* BAD */ //sink low
     }
     
     public String getDescription() {
@@ -35,4 +35,13 @@ public class Basic25 extends BasicTestCase implements MicroTestCase {
     public int getVulnerabilityCount() {
         return 1;
     }
+    
+    public static void main(String[] args) {
+		Basic25 b = new Basic25();
+		try {
+			b.doGet(null, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

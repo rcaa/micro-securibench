@@ -23,16 +23,16 @@ public class Basic29 extends BasicTestCase implements MicroTestCase {
     }
     
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String name = req.getParameter("name");
+        String name = req.getParameter("name"); //source high
         Node head = new Node();
         Node next = new Node();
         head.next = next;
         next.value = name;
         
         PrintWriter writer = resp.getWriter();
-        writer.println(next.value);                  /* BAD */
-        writer.println(head.next.value);             /* BAD */
-        writer.println(head.value);                  /* OK */
+        writer.println(next.value);                  /* BAD */ //sink low
+        writer.println(head.next.value);             /* BAD */ //sink low
+        writer.println(head.value);                  /* OK */ //sink low
     }
 
     public String getDescription() {
@@ -42,4 +42,13 @@ public class Basic29 extends BasicTestCase implements MicroTestCase {
     public int getVulnerabilityCount() {
         return 2;
     }
+    
+    public static void main(String[] args) {
+		Basic29 b = new Basic29();
+		try {
+			b.doGet(null, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

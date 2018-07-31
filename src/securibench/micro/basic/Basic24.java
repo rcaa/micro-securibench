@@ -20,10 +20,10 @@ public class Basic24 extends BasicTestCase implements MicroTestCase {
     private static final String FIELD_NAME = "name";
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String s = req.getParameter(FIELD_NAME);
+        String s = req.getParameter(FIELD_NAME); //source high
         String name = s.toLowerCase(Locale.UK);
 
-       resp.sendRedirect("/user/" + name);          /* BAD */
+       resp.sendRedirect("/user/" + name);          /* BAD */ //sink low
     }
     
     public String getDescription() {
@@ -33,4 +33,13 @@ public class Basic24 extends BasicTestCase implements MicroTestCase {
     public int getVulnerabilityCount() {
         return 1;
     }
+    
+   public static void main(String[] args) {
+	   Basic24 b = new Basic24();
+	   try {
+		b.doGet(null, null);
+	} catch (IOException e) {
+		e.printStackTrace();
+		}
+   }
 }

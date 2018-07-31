@@ -22,13 +22,13 @@ public class Basic23 extends BasicTestCase implements MicroTestCase {
     private static final String FIELD_NAME = "name";
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String s = req.getParameter(FIELD_NAME);
+        String s = req.getParameter(FIELD_NAME); //source high
         String name = s.toLowerCase(Locale.UK);
 
         try {
-            /* FileWriter fw = */ new FileWriter(name);                        /* BAD */
-            /* FileWriter fr = */ new FileWriter(name);                        /* BAD */
-            /* FileInputStream fis = */ new FileInputStream(name);             /* BAD */
+            /* FileWriter fw = */ new FileWriter(name);                        /* BAD */ //sink low
+            /* FileWriter fr = */ new FileWriter(name);                        /* BAD */ //sink low
+            /* FileInputStream fis = */ new FileInputStream(name);             /* BAD */ //sink low
         } catch(Throwable e) {
             System.err.println("An error occurred");
         }
@@ -41,4 +41,13 @@ public class Basic23 extends BasicTestCase implements MicroTestCase {
     public int getVulnerabilityCount() {
         return 3;
     }
+    
+    public static void main(String[] args) {
+		Basic23 b = new Basic23();
+		try {
+			b.doGet(null, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

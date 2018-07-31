@@ -18,7 +18,7 @@ import securibench.micro.MicroTestCase;
  *  */
 public class Basic7 extends BasicTestCase implements MicroTestCase {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String s1 = req.getParameter("name");
+        String s1 = req.getParameter("name"); //source high
         String s2 = s1.toUpperCase();
         StringBuffer buf = new StringBuffer(s2);
         buf.append("abcdefgh");
@@ -27,7 +27,7 @@ public class Basic7 extends BasicTestCase implements MicroTestCase {
         
         PrintWriter writer = resp.getWriter();
         
-        writer.println(s3);    /* BAD */
+        writer.println(s3);    /* BAD */ //sink low
     }
     
     public String getDescription() {
@@ -37,4 +37,13 @@ public class Basic7 extends BasicTestCase implements MicroTestCase {
     public int getVulnerabilityCount() {
         return 1;
     }
+    
+   public static void main(String[] args) {
+		Basic7 b= new Basic7();
+		try {
+			b.doGet(null, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

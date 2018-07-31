@@ -32,12 +32,12 @@ public class Basic16 extends BasicTestCase implements MicroTestCase {
     private static final String FIELD_NAME = "name";
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String s = req.getParameter(FIELD_NAME);
+        String s = req.getParameter(FIELD_NAME); //source high
         Widget w = new Widget();
         w.setContents(s);
         
         PrintWriter writer = resp.getWriter();  
-        writer.println(w.getContents());                    /* BAD */
+        writer.println(w.getContents());                    /* BAD */ //sink low
     }
     
     public String getDescription() {
@@ -47,4 +47,13 @@ public class Basic16 extends BasicTestCase implements MicroTestCase {
     public int getVulnerabilityCount() {
         return 1;
     }
+    
+    public static void main(String[] args) {
+		Basic16 b = new Basic16();
+		try {
+			b.doGet(null, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

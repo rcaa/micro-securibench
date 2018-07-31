@@ -32,7 +32,7 @@ public class Basic17 extends BasicTestCase implements MicroTestCase {
     private static final String FIELD_NAME = "name";
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String s = req.getParameter(FIELD_NAME);
+        String s = req.getParameter(FIELD_NAME); //source high
         Widget w1 = new Widget();
         w1.setContents(s);
         
@@ -40,8 +40,8 @@ public class Basic17 extends BasicTestCase implements MicroTestCase {
         w2.setContents("abc");
         
         PrintWriter writer = resp.getWriter();  
-        writer.println(w1.getContents());                    /* BAD */
-        writer.println(w2.getContents());                    /* OK */
+        writer.println(w1.getContents());                    /* BAD */ //sink low
+        writer.println(w2.getContents());                    /* OK */ //sink low
     }
     
     public String getDescription() {
@@ -51,4 +51,13 @@ public class Basic17 extends BasicTestCase implements MicroTestCase {
     public int getVulnerabilityCount() {
         return 1;
     }
+    
+    public static void main(String[] args) {
+		Basic17 b = new Basic17();
+		try {
+			b.doGet(null, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
