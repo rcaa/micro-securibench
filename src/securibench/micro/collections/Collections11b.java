@@ -22,4 +22,13 @@ class Collections11b {
         PrintWriter writer = resp.getWriter();  
         writer.println(str);                    /* BAD */
     }
+    
+    public static void main(String[] args) {
+		Collections11b c = new Collections11b();
+		try {
+			c.foo(null, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
