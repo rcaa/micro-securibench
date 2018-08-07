@@ -39,4 +39,13 @@ public class Inter4 extends BasicTestCase implements MicroTestCase {
     public int getVulnerabilityCount() {
         return 2;
     }
+    
+    public static void main(String[] args) {
+		Inter4 i = new Inter4();
+		try {
+			i.doGet(null, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

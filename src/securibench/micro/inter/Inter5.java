@@ -41,4 +41,13 @@ public class Inter5 extends BasicTestCase implements MicroTestCase {
     public int getVulnerabilityCount() {
         return 2;
     }
+    
+    public static void main(String[] args) {
+		Inter5 i = new Inter5();
+		try {
+			i.doGet(null, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
