@@ -33,5 +33,14 @@ public class Pred1 extends BasicTestCase implements MicroTestCase {
 
     public int getVulnerabilityCount() {
         return 0;
-    }    
+    }
+    
+    public static void main(String[] args) {
+		Pred1 p = new Pred1();
+		try {
+			p.doGet(null, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

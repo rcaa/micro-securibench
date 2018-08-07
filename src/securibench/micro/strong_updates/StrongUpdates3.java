@@ -40,4 +40,13 @@ public class StrongUpdates3 extends BasicTestCase implements MicroTestCase {
     public int getVulnerabilityCount() {
         return 0;
     }    
+    
+    public static void main(String[] args) {
+		StrongUpdates3 s = new StrongUpdates3();
+		try {
+			s.doGet(null, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

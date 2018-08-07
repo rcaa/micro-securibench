@@ -87,4 +87,15 @@ public class Inter3 extends BasicTestCase implements MicroTestCase {
     public int getVulnerabilityCount() {
         return 1;
     }
+    
+    public static void main(String[] args) {
+		Inter3 i = new Inter3();
+		try {
+			i.doGet(null, null);
+			i.f0(null);
+			i.id(null, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

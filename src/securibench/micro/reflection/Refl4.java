@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import securibench.micro.BasicTestCase;
 import securibench.micro.MicroTestCase;
+import securibench.micro.reflection.Refl3.ReflectivelyCreated;
 
 /** 
  *  @servlet description = "bug in class initializer" 
@@ -34,7 +35,7 @@ public class Refl4 extends BasicTestCase implements MicroTestCase {
         
         try {
             // this invokes the class initializer
-            Class.forName("securibench.micro.reflection.Refl4$ReflectivelyCreated");
+        	Class clazz = Class.forName("securibench.micro.reflection.Refl4$ReflectivelyCreated");
         } catch (ClassNotFoundException e) {
             System.err.println("An error occurred (1)");
         } catch (SecurityException e) {
@@ -49,4 +50,13 @@ public class Refl4 extends BasicTestCase implements MicroTestCase {
     public int getVulnerabilityCount() {
         return 1;
     }
+    
+    public static void main(String[] args) {
+		Refl4 r = new Refl4();
+		try {
+			r.doGet(null, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

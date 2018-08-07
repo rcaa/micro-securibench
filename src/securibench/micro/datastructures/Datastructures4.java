@@ -52,4 +52,13 @@ public class Datastructures4 extends BasicTestCase implements MicroTestCase {
     public int getVulnerabilityCount() {
         return 1;
     }
+    
+    public static void main(String[] args) {
+		Datastructures4 d = new Datastructures4();
+		try {
+			d.doGet(null, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

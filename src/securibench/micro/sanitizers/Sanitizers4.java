@@ -56,4 +56,13 @@ public class Sanitizers4 extends BasicTestCase implements MicroTestCase {
     public int getVulnerabilityCount() {
         return 2;
     }
+    
+    public static void main(String[] args) {
+		Sanitizers4 s = new Sanitizers4();
+		try {
+			s.doGet(null, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
