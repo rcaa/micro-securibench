@@ -58,9 +58,18 @@ public class Sanitizers6 extends BasicTestCase implements MicroTestCase {
         return 1;
     }
     
+    //public static void main(String[] args) {
+      //  System.out.println(clean("xx/../yy"));  // xx????yy
+        //System.out.println(clean("~xx"));       // ?xx
+        //System.out.println(clean("xx_yy"));     // xx_yy
+    //}
+    
     public static void main(String[] args) {
-        System.out.println(clean("xx/../yy"));  // xx????yy
-        System.out.println(clean("~xx"));       // ?xx
-        System.out.println(clean("xx_yy"));     // xx_yy
-    }
+		Sanitizers6 s = new Sanitizers6();
+		try {
+			s.doGet(null, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
